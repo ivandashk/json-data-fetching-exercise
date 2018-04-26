@@ -8,11 +8,10 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "webpack-cli": "^2.0.15"
-  },
+  "devDependencies": {},
   "dependencies": {
     "json-query": "^2.2.2",
+    "jsonq": "^1.1.0",
     "nested-property": "0.0.7"
   }
 }
