@@ -4,15 +4,11 @@ import jsonq from 'jsonq';
 import data from './data.json';
 
 function GetForgeIdByCoordinates(sector, row, seat) {
-    console.log(`Getting forgeId by coordinates (Sector ${sector}, Row ${row}, Seat ${seat}). Result: `);
     var answer = nestedProperty.get(data,`sectors.${sector-1}.rows.${row-1}.seats.${seat-1}.forgeId.${1}`);
-
-    console.log(answer);
     return answer;
 }
 
 function GetCoordinatesByForgeId(argumentId) {
-    console.log(`Getting coordinates by forgeId (forgeId: ${argumentId}). Result: `);
     var jsonQdata = jsonQ(data);
     var id = jsonQdata.find('forgeId', function() {
         if (this instanceof Array)
@@ -24,43 +20,34 @@ function GetCoordinatesByForgeId(argumentId) {
     var seat = parseInt(path[5]) + 1;
 
     var answer = [sector, row, seat]
-    console.log(answer);
     return answer;
 }
 
-function GetNumberRowsBySector(sector) {
-    console.log(`Getting all rows by sector (Sector ${sector}). Result: `);
+function GetRowsBySector(sector) {
     var answer = nestedProperty.get(data,`sectors.${sector-1}.rows`);
-    console.log(answer);
-    return answer;
+    var res = answer.map((item) => {
+        return item.name;
+    });
+    return res;
 }
-function GetNumberOfSeats(sector,row) {
-    console.log(`Getting all rows by sector (Sector ${sector}, Row ${row}). Result: `);
+function GetSitsBySectorAndRow(sector,row) {
     var answer = nestedProperty.get(data,`sectors.${sector-1}.rows.${row-1}.seats`);
-    console.log(answer);
-    return answer;
+    var res = answer.map((item) => {
+        return item.name;
+    });
+    return res;
 }
-function GetAllSector(dataMap) {
-   console.log(`Getting all sector. Result: `);
+function GetAllSectors() {
     var answer = nestedProperty.set(data);
-    console.log(answer);
-    return answer;
+    var res = answer.sectors.map((item) => {
+        return item.name;
+    });
+    return res;
 }    
 
-GetForgeIdByCoordinates(6, 2, 9);
-GetForgeIdByCoordinates(6, 7, 2);
-GetForgeIdByCoordinates(6, 5, 10);
 
-GetCoordinatesByForgeId(6358);
-GetCoordinatesByForgeId(4634);
-GetCoordinatesByForgeId(4842);
-
-GetNumberRowsBySector(1);
-GetNumberRowsBySector(6);
-GetNumberRowsBySector(2);
-
-GetNumberOfSeats(6, 2);
-GetNumberOfSeats(5, 5);
-GetNumberOfSeats(6, 3);
-
-GetAllSector();
+console.log(GetForgeIdByCoordinates(6, 2, 9));
+console.log(GetCoordinatesByForgeId(6358));
+console.log(GetAllSectors());
+console.log(GetRowsBySector(6));
+console.log(GetSitsBySectorAndRow(6, 2));
