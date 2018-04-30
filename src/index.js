@@ -40,6 +40,13 @@ function GetNumberOfSeats(sector,row) {
     console.log(answer);
     return answer;
 }
+function GetAllSector(dataMap) {
+   console.log(`Getting all sector. Result: `);
+    var answer = nestedProperty.set(data);
+    console.log(answer);
+    return answer;
+}    
+
 GetForgeIdByCoordinates(6, 2, 9);
 GetForgeIdByCoordinates(6, 7, 2);
 GetForgeIdByCoordinates(6, 5, 10);
@@ -55,3 +62,5 @@ GetNumberRowsBySector(2);
 GetNumberOfSeats(6, 2);
 GetNumberOfSeats(5, 5);
 GetNumberOfSeats(6, 3);
+
+GetAllSector();
